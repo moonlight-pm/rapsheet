@@ -44,12 +44,15 @@ module.exports = validate = (data, definition, field, extra-validators = {}) ->*
 
 validate.conditional = -> # Means the value isn't required, but must pass validations
 
+validate.token = (data, key, option) ->
+  throw 'Malformed token' if not /^[0-9a-z]{32}$/.test data[key]
+
+validate.hint = (data, key, option) ->
+  throw 'Malformed hint' if not /^[0-9a-z]{4}$/.test data[key]
+
 validate.email = (data, key, option) ->
   data[key] = data[key].to-lower-case!
   throw 'Must be a valid email address' if not /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test data[key]
-
-validate.password = (data, key, option) ->
-  # throw 'mismatch' if data[key] != data[key + 'Repeat']
 
 validate.password-repeat = (data, key, option) ->
   throw "#option don't match" if data[key] != data[key.match /(.*)\Repeat$/ .1]
@@ -95,11 +98,6 @@ validate.lowercase = (data, key, option) ->
 validate.alpha = (data, key, option) ->
   throw 'must be alpha' if not /^[a-zA-Z]*$/.test data[key]
 
-validate.secret = (data, key, option) ->
-
-validate.uuid = (data, key, option) ->
-  throw 'malformed' if not /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test data[key]
-
 validate.boolean = (data, key, option) ->
   throw 'not a boolean' if typeof! data[key] != 'Boolean'
 
@@ -124,68 +122,3 @@ validate.time = (data, key, option) ->
 
 validate.values = (data, key, option) ->
   throw 'not in values' if data[key] not in option
-
-validate.postal-state = (data, key, option) ->
-  data[key] = data[key].to-upper-case!
-  throw 'Must be a 2 letter postal abbreviation' if data[key] not in [
-    'AK',
-    'AL',
-    'AR',
-    'AS',
-    'AZ',
-    'CA',
-    'CO',
-    'CT',
-    'DC',
-    'DC',
-    'DE',
-    'FM',
-    'FL',
-    'GA',
-    'GU',
-    'HI',
-    'IA',
-    'ID',
-    'IL',
-    'IN',
-    'KS',
-    'KY',
-    'LA',
-    'MA',
-    'MD',
-    'ME',
-    'MH',
-    'MI',
-    'MN',
-    'MO',
-    'MP',
-    'MS',
-    'MT',
-    'NC',
-    'ND',
-    'NE',
-    'NH',
-    'NJ',
-    'NM',
-    'NV',
-    'NY',
-    'OH',
-    'OK',
-    'OR',
-    'PA',
-    'PR',
-    'PW',
-    'RI',
-    'SC',
-    'SD',
-    'TN',
-    'TX',
-    'UT',
-    'VA',
-    'VI',
-    'VT',
-    'WA',
-    'WI',
-    'WV',
-    'WY'
-  ]
