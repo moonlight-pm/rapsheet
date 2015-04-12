@@ -3,8 +3,9 @@ require! \koa
 require! \inflection
 require! \util
 require! \moment
+require! \http
 
-function ApiError @code, @message = ''
+function ApiError @code, @message = null
   if not @message and typeof! @code != 'Number'
     @message = code
     @code = 500
@@ -28,6 +29,7 @@ export api = ->*
     catch e
       @response.status = (e.code and /^\d\d\d$/.test e.code and e.code) or 500
       if e.code and (e.code >= 400 and e.code < 500)
+        e.message ?= http.STATUS_CODES[e.code.to-string!]
         @response.body = e.message
         message = (typeof! e.message == 'Object' and JSON.stringify(e.message)) or e.message
         if m = (/at Object\.out\$\.\w+.(\w+) \[as api\].*\/(\w+)\.ls/.exec (e.stack.split('\n') |> filter -> /\[as api\]/.test it))
@@ -75,6 +77,7 @@ export api = ->*
         result.push(yield @api!)
     else
       result = yield @api!
+    info result
     result = 200 if result == undefined
     if typeof! result == 'Number'
       @response.status = result
