@@ -74,7 +74,6 @@ export api = ->*
         @in = item
         result.push(yield @api!)
     else
-      info @api#.to-string!
       result = yield @api!
     result = 200 if result == undefined
     if typeof! result == 'Number'
