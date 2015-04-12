@@ -4,6 +4,7 @@ mail = sendgrid olio.config.mail.user, olio.config.mail.pass
 promisify-all mail
 
 export send = (to, subject, text) ->*
+  return if olio.config.mail.disabled
   yield mail.send-async do
     to:       to
     from:     olio.config.mail.from
