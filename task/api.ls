@@ -47,6 +47,17 @@ export api = ->*
     else
       @in = (pairs-to-obj (obj-to-pairs @query |> map -> [(camelize it.0), it.1])) <<< @request.body
     segments = filter id, @url.split('/')
+    if empty segments
+      @response.status = 200
+      body = ''
+      for key, val of api
+        for k, v of val
+          body += "/#key/#k"
+          for i, j of v.1
+            body += " #i[#{keys j}]"
+          body += "\n"
+      @response.body = body
+      return
     @api = (api[segments.0] and ((!segments.1 and api[segments.0][segments.0]) or api[segments.0][segments.1])) or (api[inflection.singularize segments.0] and api[inflection.singularize segments.0][segments.0])
     @error = (code, message) -> new ApiError code, message
     yield next
