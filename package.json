@@ -9,8 +9,9 @@
     "koa-bodyparser": "^1.5.0",
     "koa-gzip": "^0.1.0",
     "moment": "^2.10.2",
+    "node-neo4j": "^2.0.3",
     "olio": "git://github.com/naturalethic/olio#slim",
-    "oriento": "^1.1.3"
+    "sendgrid": "^1.6.1"
   },
   "devDependencies": {}
 }

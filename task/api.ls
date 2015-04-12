@@ -46,7 +46,7 @@ export api = ->*
       @in = @request.body |> map ~> (pairs-to-obj (obj-to-pairs @query |> map ~> [(camelize it.0), it.1])) <<< it
     else
       @in = (pairs-to-obj (obj-to-pairs @query |> map -> [(camelize it.0), it.1])) <<< @request.body
-    segments = filter id, @url.split('/')
+    segments = filter id, @url.split('?').0.split('/')
     if empty segments
       @response.status = 200
       body = ''
