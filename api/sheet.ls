@@ -20,4 +20,4 @@ export claim =
 
       You may use this token to make adjustments to your sheet.
     """
-    \OK
+    200

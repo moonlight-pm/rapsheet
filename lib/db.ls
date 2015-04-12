@@ -14,3 +14,6 @@ export create = (label, properties = {}) ->*
 
 export find = (label, properties = {}) ->*
   return (yield db.read-nodes-with-labels-and-properties-async label, properties)
+
+export destroy = (label, properties = {}) ->*
+  return (yield db.delete-nodes-with-labels-and-properties-async label, properties)

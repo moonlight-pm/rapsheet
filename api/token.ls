@@ -9,10 +9,8 @@ export tokens =
   """
   token: { +token }
   ->*
-    # Grab all claims with the hint, then hash against each to find the true claim.
-    claim = yield @claim.with-token @in.token
-    (yield @db.find \claim, email: claim.email)
-    |> map -> it.hint
+    throw @error 401 if not claim = yield @claim.with-token @in.token
+    (yield @db.find \claim, email: claim.email) |> map -> it.hint
 
 export destroy =
   """
@@ -21,3 +19,6 @@ export destroy =
   token: { +token }
   hint:  { +hint }
   ->*
+    throw @error 401 if not claim = yield @claim.with-token @in.token
+    yield @db.destroy \claim, email: claim.email, hint: @in.hint
+    200

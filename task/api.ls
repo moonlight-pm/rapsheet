@@ -77,7 +77,6 @@ export api = ->*
         result.push(yield @api!)
     else
       result = yield @api!
-    info result
     result = 200 if result == undefined
     if typeof! result == 'Number'
       @response.status = result
