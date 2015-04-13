@@ -15,6 +15,36 @@ util.inherits ApiError, Error
 
 export watch = [ 'host.ls', 'olio.ls', 'api', 'mid', 'lib', 'task/api.ls' ]
 
+export documentation = ->*
+  content = []
+  content.push "\n\# Rapsheet API"
+  content.push "***\n"
+  for mname, module of api
+    content.push "\#\#\# #{mname.to-upper-case!}\n"
+    for name, definition of module
+      if name not in [ mname, inflection.pluralize(mname) ]
+        name = "#mname/#name"
+      content.push "\#\#\#\# /#name"
+      content ++= definition.0.split('\n')
+      content.push ''
+      for pname, pvals of definition.1
+        content.push "* #pname[#{keys pvals}]"
+      content.push ''
+  """
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Rapsheet</title>
+    </head>
+    <body>
+      <xmp theme="cyborg" style="display:none">
+        #{content.join '\n'}
+      </xmp>
+      <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+    </body>
+  </html>
+  """
+
 export api = ->*
   olio.api = api <<< require-dir "api"
   olio.config.api ?= {}
@@ -50,15 +80,8 @@ export api = ->*
       @in = (pairs-to-obj (obj-to-pairs @query |> map -> [(camelize it.0), it.1])) <<< @request.body
     segments = filter id, @url.split('?').0.split('/')
     if empty segments
+      @response.body = yield documentation!
       @response.status = 200
-      body = ''
-      for key, val of api
-        for k, v of val
-          body += "/#key/#k"
-          for i, j of v.1
-            body += " #i[#{keys j}]"
-          body += "\n"
-      @response.body = body
       return
     @api = (api[segments.0] and ((!segments.1 and api[segments.0][segments.0]) or api[segments.0][segments.1])) or (api[inflection.singularize segments.0] and api[inflection.singularize segments.0][segments.0])
     @error = (code, message) -> new ApiError code, message
