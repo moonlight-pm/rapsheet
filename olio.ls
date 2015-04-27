@@ -1,9 +1,7 @@
 export do
   db:
     host: \localhost
-    port: \7474
-    user: \neo4j
-    pass: \secret
+    port: \8529
   api:
     port: 9002
     mid: <[ lib validation ]>
