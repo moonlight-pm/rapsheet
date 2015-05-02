@@ -29,8 +29,6 @@ Standard [olio](https://github.com/naturalethic/olio) setup:
 ```
 /api  # Api endpoints
 /lib  # Support libraries
-/mid  # Middleware
-/task # Olio tasks
 olio.ls # Application configuration
 host.ls # Host specific configuration
 ```
