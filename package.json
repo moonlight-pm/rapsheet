@@ -5,13 +5,10 @@
   "dependencies": {
     "aqb": "^1.10.0",
     "arangojs": "^3.5.0",
-    "glob": "^5.0.5",
-    "inflection": "^1.7.0",
-    "koa": "^0.19.1",
-    "koa-bodyparser": "^1.5.0",
-    "koa-gzip": "^0.1.0",
     "moment": "^2.10.2",
-    "olio": "git://github.com/naturalethic/olio#slim",
+    "olio": "naturalethic/olio#slim",
+    "olio-api": "naturalethic/olio-api",
+    "olio-arango": "naturalethic/olio-arango",
     "sendgrid": "^1.6.1"
   },
   "devDependencies": {}
