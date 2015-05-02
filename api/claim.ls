@@ -12,7 +12,6 @@ export claim =
     @in.hint = take 4 token
     @in.salt = @hash.random 32
     @in.hash = @hash.encrypt token, @in.salt
-    x = bar
     yield @db.create \claim, @in
     yield @mail.send @in.email, 'Your claim token resides within.', """
       Someone has made a claim for the email address #{@in.email} on rapsheet.me.  If you have not made this claim, you may safely ignore this email.
