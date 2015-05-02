@@ -9,7 +9,7 @@ export tokens =
   """
   token: { +token }
   ->*
-    throw @error 401 if not claim = yield @claim.with-token @in.token
+    @error 401 if not claim = yield @claim.with-token @in.token
     (yield @db.find \claim, email: claim.email) |> map -> it.hint
 
 export destroy =
@@ -19,6 +19,6 @@ export destroy =
   token: { +token }
   hint:  { +hint }
   ->*
-    throw @error 401 if not claim = yield @claim.with-token @in.token
+    @error 401 if not claim = yield @claim.with-token @in.token
     yield @db.destroy \claim, email: claim.email, hint: @in.hint
     200
