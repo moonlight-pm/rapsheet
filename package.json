@@ -6,7 +6,7 @@
     "aqb": "^1.10.0",
     "arangojs": "^3.5.0",
     "moment": "^2.10.2",
-    "olio": "naturalethic/olio#slim",
+    "olio": "naturalethic/olio",
     "olio-api": "naturalethic/olio-api",
     "olio-arango": "naturalethic/olio-arango",
     "sendgrid": "^1.6.1"
