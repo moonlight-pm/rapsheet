@@ -13,22 +13,23 @@ Rapsheet is begining life as an api, so you can try it out with curl.  Right now
 
 If you have sendgrid enabled, this will mail you a token which you must use on all subsequent requests:
 
-`curl "localhost:9002/claim?email=myemail@example.com"`
+`curl "localhost:9002/token?email=myemail@example.com"`
 
-This will get you a list of token hints, provided you know at least one of them:
+This will get you a list of token hintsf:
 
-`curl "localhost:9002/tokens?token=cd428d7df51b0c5f3f0835dc0427c3fd"`
+`curl "localhost:9002/token/hints?token=nyuf1en6mz08wdbbdhxzey77bbt423mfjyzxucy723vz51gz3d1g"`
 
-And this will delete a token with the given hint:
+And this will destroy a token with the given hint:
 
-`curl "localhost:9002/tokens?token=cd428d7df51b0c5f3f0835dc0427c3fd&hint=347h"`
+`curl "localhost:9002/token/destroy?token=nyuf1en6mz08wdbbdhxzey77bbt423mfjyzxucy723vz51gz3d1g&hint=005ekgdqfja0kwrj0b7974bdmx"`
 
 ### Project Structure
 Standard [olio](https://github.com/naturalethic/olio) setup:
 
 ```
-/api  # Api endpoints
-/lib  # Support libraries
-olio.ls # Application configuration
-host.ls # Host specific configuration
+/api        # Api endpoints
+/lib        # Support libraries
+olio.ls     # Application configuration
+host.ls     # Host specific configuration
+validate.ls # Custom validations
 ```

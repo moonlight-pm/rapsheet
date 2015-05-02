@@ -5,6 +5,7 @@
   "dependencies": {
     "aqb": "^1.10.0",
     "arangojs": "^3.5.0",
+    "base32": "0.0.6",
     "moment": "^2.10.2",
     "olio": "naturalethic/olio",
     "olio-api": "naturalethic/olio-api",
