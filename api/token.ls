@@ -10,12 +10,12 @@ export token =
   ->*
     token    = @hash.random 32
     @in.hint = take (token.length / 2), token
-    info token, @in.hint
     @in.salt = @hash.random 32
     @in.hash = @hash.encrypt token, @in.salt
     yield @db.create \token, @in
-    yield @mail.send @in.email, 'Your token resides within.', """
-      Someone has requested a token for identifier '#{@in.email}' on rapsheet.me.  If you have not made this request, you may safely ignore this email.
+    yield @mail to: @in.email, subject: 'Your token resides within.', text: """
+      Someone has requested a token for identifier '#{@in.email}' on rapsheet.me.
+      If you have not made this request, you may safely ignore this email.
 
       Your token: #token
 
