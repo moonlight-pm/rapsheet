@@ -8,10 +8,10 @@ export do
     mid: <[ error docs resolve lib db validation invoke ]>
     log-ip: false
     resolve-session-id: (request) ->
-      if token = (/token=([0-9a-z]{52})/.exec request.url)?1
-        take (token.length / 2), token
+      if request.in.token
+        take (request.in.token.length / 2), request.in.token
       else
-        '-' * 26
+        '-' * 13
   mail:
     from:     \support@rapsheet.me
     fromname: \Rapsheet
