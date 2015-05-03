@@ -30,7 +30,7 @@ export hints =
 
   The user may want to clean out some old tokens, so lets give them a list.
 
-  Each token is 52 bytes long, each hint is the first half of a token.
+  Each token is characters bytes long, each hint is the first half of a token.
   """
   token: { +token }
   ->*
