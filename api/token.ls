@@ -8,11 +8,12 @@ export token =
   """
   email: { +email }
   ->*
-    token    = @hash.random 32
+    token    = @token.generate!
+    info token, token.length
     @in.hint = take (token.length / 2), token
-    @in.salt = @hash.random 32
-    @in.hash = @hash.encrypt token, @in.salt
-    yield @db.create \token, @in
+    @in.salt = @token.generate!
+    @in.hash = @token.encrypt token, @in.salt
+    yield @db.create \token, @in{identifier:email, hint, salt, hash}
     yield @mail to: @in.email, subject: 'Your token resides within.', text: """
       Someone has requested a token for identifier '#{@in.email}' on rapsheet.me.
       If you have not made this request, you may safely ignore this email.
@@ -34,7 +35,7 @@ export hints =
   token: { +token }
   ->*
     @error 401 if not token = yield @token.authenticate @in.token
-    (yield @db.find \token, email: token.email) |> map -> it.hint
+    (yield @db.find \token, token{identifier}) |> map -> it.hint
 
 export destroy =
   """
@@ -44,5 +45,5 @@ export destroy =
   hint:  { +hint }
   ->*
     @error 401 if not token = yield @token.authenticate @in.token
-    yield @db.destroy \token, email: token.email, hint: @in.hint
+    yield @db.destroy \token, token{identifier} <<< hint: @in.hint
     200
