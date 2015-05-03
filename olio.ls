@@ -5,7 +5,7 @@ export do
     name: \rapsheet
   api:
     port: 9002
-    mid: <[ error docs resolve lib db validation invoke ]>
+    mid: <[ error docs resolve lib db validation log invoke ]>
     log-ip: false
     resolve-session-id: (request) ->
       if request.in.token
