@@ -9,8 +9,6 @@
 1. To view api documentation, browse to `http://localhost:9002`
 
 ### Usage
-Rapsheet is begining life as an api, so you can try it out with curl.  Right now it only provides a simple authentication mechanism against email addresses.  Here are some sample commands:
-
 If you have sendgrid enabled, this will mail you a token which you must use on all subsequent requests:
 
 `/token?email=myemail@example.com`
@@ -29,6 +27,7 @@ Standard [olio](https://github.com/naturalethic/olio) setup:
 ```
 /api        # Api endpoints
 /lib        # Support libraries
+/web        # Browser client files
 olio.ls     # Application configuration
 host.ls     # Host specific configuration
 validate.ls # Custom validations

@@ -5,10 +5,10 @@ export do
     name: \rapsheet
   api:
     port: 9002
-    mid: <[ error docs resolve lib db validation log invoke ]>
+    mid: <[ log docs web resolve lib db error validation invoke ]>
     log-ip: false
     resolve-session-id: (request) ->
-      if request.in.token
+      if request.in?token
         take (request.in.token.length / 2), request.in.token
       else
         '-' * 13
