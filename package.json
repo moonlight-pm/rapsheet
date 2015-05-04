@@ -4,12 +4,14 @@
   "version": "0.1.0",
   "dependencies": {
     "base32": "0.0.6",
+    "jquery": "^2.1.4",
     "moment": "^2.10.2",
     "olio": "naturalethic/olio",
     "olio-angular": "naturalethic/olio-angular",
     "olio-api": "naturalethic/olio-api",
     "olio-arango": "naturalethic/olio-arango",
-    "olio-sendgrid": "naturalethic/olio-sendgrid"
+    "olio-sendgrid": "naturalethic/olio-sendgrid",
+    "semantic-ui-css": "^1.12.1"
   },
   "devDependencies": {}
 }

@@ -4,8 +4,10 @@ export do
     port: \8529
     name: \rapsheet
   api:
+    name: \Rapsheet
     port: 9002
     mid: <[ log docs web resolve lib db error validation invoke ]>
+    docs: \/api
     log-ip: false
     resolve-session-id: (request) ->
       if request.in?token
@@ -17,3 +19,17 @@ export do
     fromname: \Rapsheet
     user:     \username
     pass:     \password
+  web:
+    app: \rapsheet
+    modules: [
+    ]
+    imports: [
+      'semantic-ui-css/semantic.css'
+    ]
+    require: [
+      'semantic-ui-css/semantic'
+    ]
+    require-global: {
+      $: \jquery
+      jQuery: \jquery
+    }

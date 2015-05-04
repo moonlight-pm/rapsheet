@@ -1,3 +1,5 @@
 node_modules
 host.ls
 host.ls.docker
+public
+tmp
