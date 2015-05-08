@@ -5,8 +5,9 @@
 1. Copy `host.ls.example` -> `host.ls` and edit it.  Configuration in `host.ls` overrides those in `olio.ls`.
 1. `npm install`
 1. Make sure `./node_modules/.bin` is in your path
-1. `olio api`
-1. To view api documentation, browse to `http://localhost:9002`
+1. `olio web` to build the static web files
+1. `olio api` to run the api/web server
+1. To view api documentation, browse to `http://localhost:9002/api`, for the static site, browse the root.
 
 ### Usage
 If you have sendgrid enabled, this will mail you a token which you must use on all subsequent requests:
